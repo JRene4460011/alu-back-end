@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+"""Gather an employee's TODO list progress from a REST API."""
 
 import sys
- 
 import requests
  
  
