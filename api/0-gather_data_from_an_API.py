@@ -7,16 +7,16 @@ import sys
 
 if __name__ == "__main__":
     employee_id = int(sys.argv[1])
+    api_url = "https://jsonplaceholder.typicode.com"
 
-    user_url = "https://jsonplaceholder.typicode.com/users/{}".format(
-        employee_id
-    )
-    todos_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(
-        employee_id
-    )
+    employee = requests.get(
+        "{}/users/{}".format(api_url, employee_id)
+    ).json()
 
-    employee = requests.get(user_url).json()
-    tasks = requests.get(todos_url).json()
+    tasks = requests.get(
+        "{}/todos".format(api_url),
+        params={"userId": employee_id}
+    ).json()
 
     completed_tasks = [
         task for task in tasks if task.get("completed") is True
